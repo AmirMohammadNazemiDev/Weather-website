@@ -1,8 +1,10 @@
+import WeatherCard from "./components/WeatherCard"
+
 function App() {
 
   return (
     <div>
-      <h1>Hello World</h1>
+      <WeatherCard/>
     </div>
   )
 }

@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.test-back {
+  min-height: 100vh;
+  background: url("./assets/images/clear.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

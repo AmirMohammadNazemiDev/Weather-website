@@ -56,7 +56,7 @@ function WeatherContent() {
   <>
     <main
       className={`min-h-screen w-full bg-cover bg-center bg-no-repeat px-5 py-8 text-white transition-all duration-300 ${
-        loading ? "blur-[2px]" : ""
+        loading ? "blur-[4px]" : ""
       }`}
       style={{
         backgroundImage: weather
@@ -67,12 +67,6 @@ function WeatherContent() {
       <div className="mx-auto w-full max-w-sm pt-16">
 
         <SearchBar onSearch={handleSearch} />
-
-        {error && (
-          <p className="mt-6 text-center text-sm font-medium text-red-200">
-            {error}
-          </p>
-        )}
 
         <div className="mt-14">
           <WeatherCard weather={weather} />

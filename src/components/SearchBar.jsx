@@ -5,12 +5,13 @@ function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if (!city.trim()) {
-      return;
+        return;
     }
-
+    
     onSearch(city);
+    setCity("")
   };
 
   return (

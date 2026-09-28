@@ -1,53 +1,57 @@
-import clearDay from "@meteocons/svg/fill/snow.svg"
+import { useState } from "react";
+import SearchBar from "./SearchBar";
+import WeatherCard from "./WeatherCard";
+import { searchCity } from "../services/geocodingService";
+import { getWeather } from "../services/weatherService";
 
 function WeatherContent() {
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSearch = async (city) => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const cityData = await searchCity(city);
+
+      const weatherData = await getWeather(
+        cityData.latitude,
+        cityData.longitude
+      );
+
+      setWeather({
+        city: cityData.name,
+        country: cityData.country,
+        temperature: weatherData.temperature,
+        weatherCode: weatherData.weatherCode,
+      });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="mt-20 w-full max-w-sm">
-  <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 text-white shadow-2xl shadow-blue-950/30 backdrop-blur-2xl">
+      <SearchBar onSearch={handleSearch} />
 
-    <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-400/20 blur-3xl" />
-    <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-cyan-300/10 blur-3xl" />
+      {loading && (
+        <p className="mt-5 text-center text-white">
+          Loading...
+        </p>
+      )}
 
-    {/* Header */}
-    <div className="relative z-10 flex flex-col items-center gap-1">
-      <h1 className="text-4xl font-semibold tracking-tight">
-        Tehran
-      </h1>
+      {error && (
+        <p className="mt-5 text-center text-red-300">
+          {error}
+        </p>
+      )}
 
-      <p className="text-sm font-medium text-blue-100/70">
-        Iran
-      </p>
+      <WeatherCard weather={weather} />
     </div>
-
-    {/* Main Content */}
-    <div className="relative z-10 mt-10 flex flex-col items-center gap-5">
-
-      <div className="flex items-start">
-        <span className="text-7xl font-extralight tracking-tight">
-          30
-        </span>
-
-        <span className="mt-2 text-3xl font-light">
-          °
-        </span>
-      </div>
-
-      <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-md">
-        <img
-          src={clearDay}
-          alt="Sunny"
-          className="h-12 w-12 object-contain"
-        />
-
-        <h2 className="text-xl font-medium">
-          Sunny
-        </h2>
-      </div>
-
-    </div>
-
-  </div>
-</div>
   );
 }
 

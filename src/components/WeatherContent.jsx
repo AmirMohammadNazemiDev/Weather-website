@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import WeatherCard from "./WeatherCard";
+import Loading from "./Loading";
+
 import { searchCity } from "../services/geocodingService";
 import { getWeather } from "../services/weatherService";
+
 import {
   weatherConditions,
   getWeatherCondition,
@@ -60,29 +63,21 @@ function WeatherContent() {
     >
       <div className="mx-auto w-full max-w-sm pt-16">
 
-        {/* Search */}
         <SearchBar onSearch={handleSearch} />
 
-        {/* Loading */}
-        {loading && (
-          <p className="mt-6 text-center text-sm font-medium text-white/80">
-            Loading...
-          </p>
-        )}
-
-        {/* Error */}
         {error && (
           <p className="mt-6 text-center text-sm font-medium text-red-200">
             {error}
           </p>
         )}
 
-        {/* Weather Card */}
-        <div className="mt-40">
+        <div className="mt-14">
           <WeatherCard weather={weather} />
         </div>
 
       </div>
+
+      {loading && <Loading />}
     </main>
   );
 }

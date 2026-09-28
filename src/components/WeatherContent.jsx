@@ -53,8 +53,11 @@ function WeatherContent() {
   }, []);
 
   return (
+  <>
     <main
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-5 py-8 text-white transition-all duration-700"
+      className={`min-h-screen w-full bg-cover bg-center bg-no-repeat px-5 py-8 text-white transition-all duration-300 ${
+        loading ? "blur-[2px]" : ""
+      }`}
       style={{
         backgroundImage: weather
           ? `url(${weather.condition.background})`
@@ -76,10 +79,11 @@ function WeatherContent() {
         </div>
 
       </div>
-
-      {loading && <Loading />}
     </main>
-  );
+
+    {loading && <Loading />}
+  </>
+);
 }
 
 export default WeatherContent;

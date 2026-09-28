@@ -21,7 +21,7 @@ function WeatherCard({ weather }) {
         </p>
       </div>
 
-      {/* Main Content */}
+      {/* Temperature */}
       <div className="relative z-10 mt-10 flex flex-col items-center gap-5">
 
         <div className="flex items-start">
@@ -34,11 +34,19 @@ function WeatherCard({ weather }) {
           </span>
         </div>
 
+        {/* Weather Status */}
         <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-md">
 
-          <h2 className="text-xl font-medium">
-            Weather
-          </h2>
+          <span className="text-xl font-medium">
+            Clear
+          </span>
+
+          {/* Meteocons icon */}
+          <img
+            src={clearDay}
+            alt="Clear"
+            className="h-10 w-10"
+          />
 
         </div>
 

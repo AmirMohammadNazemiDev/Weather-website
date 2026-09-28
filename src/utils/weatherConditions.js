@@ -49,3 +49,33 @@ export const weatherConditions = {
     icon: windyIcon,
   },
 };
+
+
+
+export const getWeatherCondition = (weatherCode) => {
+  if (weatherCode === 0) {
+    return "clear";
+  }
+
+  if (weatherCode >= 1 && weatherCode <= 3) {
+    return "cloudy";
+  }
+
+  if (weatherCode >= 51 && weatherCode <= 67) {
+    return "rainy";
+  }
+
+  if (weatherCode >= 71 && weatherCode <= 77) {
+    return "snowy";
+  }
+
+  if (weatherCode >= 95 && weatherCode <= 99) {
+    return "stormy";
+  }
+
+  if (weatherCode >= 45 && weatherCode <= 48) {
+    return "windy";
+  }
+
+  return "clear";
+};

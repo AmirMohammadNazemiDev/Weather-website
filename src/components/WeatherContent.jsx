@@ -3,6 +3,10 @@ import SearchBar from "./SearchBar";
 import WeatherCard from "./WeatherCard";
 import { searchCity } from "../services/geocodingService";
 import { getWeather } from "../services/weatherService";
+import {
+  weatherConditions,
+  getWeatherCondition,
+} from "../utils/weatherConditions";
 
 function WeatherContent() {
   const [weather, setWeather] = useState(null);
@@ -21,11 +25,18 @@ function WeatherContent() {
         cityData.longitude
       );
 
+      const conditionKey = getWeatherCondition(
+        weatherData.weatherCode
+      );
+
+      const condition = weatherConditions[conditionKey];
+
       setWeather({
         city: cityData.name,
         country: cityData.country,
         temperature: weatherData.temperature,
         weatherCode: weatherData.weatherCode,
+        condition,
       });
     } catch (error) {
       setError(error.message);

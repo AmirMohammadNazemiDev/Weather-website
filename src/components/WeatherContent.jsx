@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import WeatherCard from "./WeatherCard";
 import { searchCity } from "../services/geocodingService";
@@ -34,24 +34,30 @@ function WeatherContent() {
     }
   };
 
+  useEffect(() => {
+    handleSearch("Tehran");
+  }, []);
+
   return (
-    <div className="mt-20 w-full max-w-sm">
-      <SearchBar onSearch={handleSearch} />
+    <main className="min-h-screen w-full bg-gray-900 p-5 text-white">
+      <div className="mx-auto w-full max-w-sm pt-20">
+        <SearchBar onSearch={handleSearch} />
 
-      {loading && (
-        <p className="mt-5 text-center text-white">
-          Loading...
-        </p>
-      )}
+        {loading && (
+          <p className="mt-5 text-center text-white">
+            Loading...
+          </p>
+        )}
 
-      {error && (
-        <p className="mt-5 text-center text-red-300">
-          {error}
-        </p>
-      )}
+        {error && (
+          <p className="mt-5 text-center text-red-300">
+            {error}
+          </p>
+        )}
 
-      <WeatherCard weather={weather} />
-    </div>
+        <WeatherCard weather={weather} />
+      </div>
+    </main>
   );
 }
 

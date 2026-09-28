@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function SearchBar({ onSearch }) {
   const [city, setCity] = useState("");
 

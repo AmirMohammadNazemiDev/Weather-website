@@ -1,10 +1,10 @@
-import WeatherCard from "./components/WeatherCard"
+import WeatherContent from "./components/WeatherContent"
 
 function App() {
 
   return (
     <div>
-      <WeatherCard/>
+      <WeatherContent/>
     </div>
   )
 }

@@ -6,7 +6,9 @@ function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!city.trim()) return;
+    if (!city.trim()) {
+      return;
+    }
 
     onSearch(city);
   };
@@ -14,7 +16,7 @@ function SearchBar({ onSearch }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center gap-2 mb-30"
+      className="mb-8 flex items-center gap-2"
     >
       <input
         type="text"

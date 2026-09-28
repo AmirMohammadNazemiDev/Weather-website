@@ -50,23 +50,38 @@ function WeatherContent() {
   }, []);
 
   return (
-    <main className="min-h-screen w-full bg-gray-900 p-5 text-white">
-      <div className="mx-auto w-full max-w-sm pt-20">
+    <main
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-5 py-8 text-white transition-all duration-700"
+      style={{
+        backgroundImage: weather
+          ? `url(${weather.condition.background})`
+          : "none",
+      }}
+    >
+      <div className="mx-auto w-full max-w-sm pt-16">
+
+        {/* Search */}
         <SearchBar onSearch={handleSearch} />
 
+        {/* Loading */}
         {loading && (
-          <p className="mt-5 text-center text-white">
+          <p className="mt-6 text-center text-sm font-medium text-white/80">
             Loading...
           </p>
         )}
 
+        {/* Error */}
         {error && (
-          <p className="mt-5 text-center text-red-300">
+          <p className="mt-6 text-center text-sm font-medium text-red-200">
             {error}
           </p>
         )}
 
-        <WeatherCard weather={weather} />
+        {/* Weather Card */}
+        <div className="mt-40">
+          <WeatherCard weather={weather} />
+        </div>
+
       </div>
     </main>
   );
